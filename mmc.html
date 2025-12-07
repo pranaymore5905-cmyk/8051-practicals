@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>8051 Assembly Practicals</title>
+  <style>
+    body {
+      font-family: Consolas, monospace;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    h2 {
+      color: #333;
+    }
+    pre {
+      background: #ffffff;
+      padding: 15px;
+      border: 1px solid #ccc;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+
+<h2>PRACTICAL NO 2</h2>
+<pre>
+ORG 0000H
+
+MOV A,#55H
+MOV R1,#0AAH
+ANL A,R1
+MOV 30H,A
+
+MOV A,#55H
+ORL A,R1
+MOV 31H,A
+
+MOV A,#55H
+XRL A,R1
+MOV 32H,A
+
+MOV A,#55H
+CPL A
+MOV 33H,A
+
+SJMP $
+END
+</pre>
+
+<h2>PRACTICAL NO 3</h2>
+<pre>
+ORG 0000H
+
+MOV R0,#20H
+MOV R1,#40H
+MOV R2,#0AH
+
+NEXT: MOV A,@R0
+MOV @R1,A
+INC R0
+INC R1
+DJNZ R2,NEXT
+
+SJMP $
+END
+</pre>
+
+<h2>PRACTICAL NO 4</h2>
+<pre>
+MOV R1,#40H
+MOV R2,#05H
+
+HERE: MOV A,@R0
+XCH A,@R1
+MOV @R0,A
+INC R0
+INC R1
+DJNZ R2,HERE
+
+END
+</pre>
+
+<h2>PRACTICAL NO 5</h2>
+<pre>
+ORG 0000H
+
+MOV R0,#34H
+MOV A,@R0
+MOV R1,#35H
+ADD A,@R1
+
+MOV R5,A
+CLR A
+ADDC A,#00H
+MOV R6,A
+
+END
+</pre>
+
+<h2>PRACTICAL NO 6</h2>
+<pre>
+ORG 0000H
+
+MOV A,34H
+CLR C
+SUBB A,35H
+MOV R5,A
+
+MOV A,#00H
+JNC NO_BORROW
+MOV A,#0FFH
+
+NO_BORROW:
+MOV R6,A
+
+SJMP $
+END
+</pre>
+
+<h2>PRACTICAL NO 8</h2>
+<pre>
+ORG 0000H
+
+MOV A,30H
+MOV B,31H
+
+DIV AB
+
+MOV 32H,A
+MOV 33H,B
+
+END
+</pre>
+
+</body>
+</html>
