@@ -1,0 +1,185 @@
+PRACTICAL nO 2.
+
+ORG 0000H
+
+MOV A,#55H
+MOV R1,#0AAH
+ANL A,R1
+MOV 30H,A
+
+MOV A,#55H
+ORL A,R1
+MOV 31H,A
+
+MOV A,#55H
+XRL A,R1
+MOV 32H,A
+
+MOV A,#55H
+CPL A
+MOV 33H,A
+
+SJMP $
+END
+
+
+PRACTICAL NO 3.
+
+ORG 0000H
+
+MOV R0,#20H
+MOV R1,#40H
+MOV R2,#0AH
+
+NEXT: MOV A,@R0
+MOV @R1,A
+INC R0
+INC R1
+DJNZ R2,NEXT
+
+SJMP $
+END
+
+
+PRACTICAL NO. 4
+
+MOV R1,#40H
+MOV R2,#05H
+
+HERE: MOV A,@R0
+XCH A,@R1
+MOV @R0,A
+INC R0
+INC R1
+DJNZ R2,HERE
+
+END
+
+
+PRACTICAL NO.5
+
+ORG 0000H
+
+MOV R0,#34H
+MOV A,@R0
+MOV R1,#35H
+ADD A,@R1
+
+; Store result
+MOV R5,A
+CLR A
+ADDC A,#00H
+MOV R6,A
+
+END
+
+
+PRACTICAL NO 6.
+
+ORG 0000H
+
+MOV A, 34H
+CLR C
+SUBB A, 35H
+MOV R5, A
+
+; Now handle the borrow flag (CY)
+MOV A, #00H
+JNC NO_BORROW        ; If no borrow, skip next step
+MOV A, #0FFH         ; If borrow occurred => MSB = FFH
+
+NO_BORROW:
+MOV R6, A            ; Store MSB in R6
+
+SJMP $               ; Stop program (infinite loop)
+
+END
+
+
+PRACTICAL NO 8.
+
+ORG 0000H
+
+MOV A, 30H      ; Load first 8-bit number into Accumulator
+MOV B, 31H      ; Load second 8-bit number into B register
+
+DIV AB          ; A ÷ B ? Quotient in A, Remainder in B
+                ; A = Quotient, B = Remainder
+
+MOV 32H, A      ; Store quotient
+MOV 33H, B      ; Store remainder
+
+END
+
+practical no 7.
+
+ORG 0000H
+
+MOV A, #30H
+MOV B, #31H
+MUL AB
+MOV 32H, A
+MOV 33H, B
+SJMP $
+
+END
+
+practical no 9.
+
+
+ORG 0000H
+ORG 0020H
+
+ARRAY: DB 05H, 0FH, 3FH, 12H, 0FH, 03H
+
+ORG 0040H
+POSITIVE: DS 5
+
+ORG 0100H
+
+START:
+MOV R0, #ARRAY
+MOV R1, #POSITIVE
+MOV R2, #05H
+
+NEXT:
+MOV A, @R0
+JB ACC.7, SKIP
+MOV @R1, A
+INC R1
+
+SKIP:
+INC R0
+DJNZ R2, NEXT
+
+HERE:
+SJMP HERE
+
+END
+
+practical no 10.
+
+ORG 0000H
+
+MOV R0, #20H
+MOV R1, #40H
+MOV R2, #05H
+
+NEXT:
+MOV A, @R0
+JB ACC.0, STOR
+SJMP SKIP
+
+STOR:
+MOV @R1, A
+INC R1
+
+SKIP:
+INC R0
+DJNZ R2, NEXT
+
+HERE:
+SJMP HERE
+
+END
+
